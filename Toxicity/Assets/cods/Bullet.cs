@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
     {
         Enemy enemy = collision.GetComponent<Enemy>();
 
-        if(enemy != null && enemy.CompareTag("enemy"))
+        if(enemy.CompareTag("enemy"))
         {
             Debug.Log("vurdu");
             enemy.TakeDamage(20);
