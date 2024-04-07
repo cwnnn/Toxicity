@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
 
     public float health = 100f;
 
-    public int speed = 3;
+    
 
     public void TakeDamage(float damage)
     {
@@ -22,15 +22,5 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
 
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(speed, rb.velocity.y);
-    }
 }
