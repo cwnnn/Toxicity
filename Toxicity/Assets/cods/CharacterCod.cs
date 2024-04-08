@@ -18,6 +18,8 @@ public class CharacterCod : MonoBehaviour
     float moveHorizontal;
 
     public bool faceDirection;
+
+    public float health =100;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -72,6 +74,16 @@ public class CharacterCod : MonoBehaviour
         Vector3 rotation = transform.rotation.eulerAngles;
         rotation.y += 180f;
         transform.rotation = Quaternion.Euler(rotation);
+    }
+    public void CharacterDamage(float damage)
+    {
+        health -= damage;
+        Anim.SetTrigger("ishurting");
+        if (health <= 0)
+        {
+                moveSpeed = 0;
+                Anim.SetTrigger("isdeathing");
+        }
     }
 
 

@@ -1,26 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    //rivate GameObject redParticles;
+    
 
     public Rigidbody2D rb;
 
     public float health = 100f;
-
+    private Animator anim;
+    EnemyAi ai;
+    public float life = 1;
     
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+        ai = GetComponent<EnemyAi>();
+        StartCoroutine(MyCoroutine());
+
+    }
+
+
 
     public void TakeDamage(float damage)
     {
+
+        StartCoroutine(MyCoroutine());
         health -= damage;
-        if(health <= 0)
+        anim.SetTrigger("enemyhurting");
+        if (health <= 0)
         {
-            //Instantiate(redParticles, transform.position, transform.rotation);
-            Destroy(gameObject);
+            if (anim != null)
+            {
+                ai.speed = 0;
+                anim.SetTrigger("enemydeathing");
+                          
+            }
+           
         }
     }
+    void enemydestroyed()
+    {
+        Destroy(gameObject);
+    }
+    
 
+    IEnumerator MyCoroutine()
+    {
+        ai.speed *= 0.0001f;
+        yield return new WaitForSeconds(0.2f);
+        ai.speed *=10000;
+
+    }
 }

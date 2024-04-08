@@ -1,13 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
 public class EnemyAi : MonoBehaviour
 {
+    [SerializeField]
     private Transform Target;
     public float speed;
     public float stopDistance;
+    
+
     
 
     // Start is called before the first frame update
@@ -31,4 +36,6 @@ public class EnemyAi : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
         }
     }
+
+ 
 }
