@@ -15,7 +15,7 @@ public class CharacterCod : MonoBehaviour
 
 
     public float moveSpeed;
-    float moveHorizontal;
+    public float moveHorizontal;
 
     public bool faceDirection;
 
@@ -81,14 +81,28 @@ public class CharacterCod : MonoBehaviour
         Anim.SetTrigger("ishurting");
         if (health <= 0)
         {
-                moveSpeed = 0;
-                Anim.SetTrigger("isdeathing");
+            moveSpeed = 0;
+            Anim.SetTrigger("isdeathing");
         }
     }
 
 
     void CharacterAnimation()
     {
+        if (Input.GetKeyDown(KeyCode.X) && moveHorizontal!=0 && isGrounded==true)
+        {
+            Anim.SetTrigger("isSwordRunAttack");
+        }
+        else if (Input.GetKeyDown(KeyCode.X) && isGrounded==true)
+        {
+            Anim.SetTrigger("isSwordAttack");
+        }
+        else  if (Input.GetKeyDown(KeyCode.X))
+        {
+            Anim.SetTrigger("isSwordAirAttack");
+        }
+        
+
         if (moveHorizontal != 0)
         {
             Anim.SetBool("isSwordRunning",true);
@@ -129,8 +143,7 @@ public class CharacterCod : MonoBehaviour
         if (col.gameObject.tag == "Ground")
         {
             isGrounded = true;
-        }
-       
+        }    
     }
     private void OnCollisionStay2D(Collision2D col)
     {
@@ -139,6 +152,7 @@ public class CharacterCod : MonoBehaviour
         {
             isGrounded = true;
         }
+
     }
     void OnCollisionExit2D(Collision2D col)
     {

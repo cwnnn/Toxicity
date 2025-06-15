@@ -26,6 +26,7 @@ public class EnemyAi : MonoBehaviour
     {
         EnemyFollow();
     }
+    
 
     void EnemyFollow()
     {

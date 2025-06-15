@@ -11,13 +11,13 @@ public class Enemy : MonoBehaviour
     public Rigidbody2D rb;
 
     public float health = 100f;
-<<<<<<< HEAD
     private Animator anim;
     EnemyAi ai;
     public float life = 1;
     
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         ai = GetComponent<EnemyAi>();
         StartCoroutine(MyCoroutine());
@@ -25,10 +25,6 @@ public class Enemy : MonoBehaviour
     }
 
 
-=======
-
-    public int speed = 3;
->>>>>>> 6b10d34b45725e5656aa3197a792e7033e02c7d0
 
     public void TakeDamage(float damage)
     {
@@ -40,14 +36,16 @@ public class Enemy : MonoBehaviour
         {
             if (anim != null)
             {
+                GetComponent<Collider2D>().enabled = false;
                 ai.speed = 0;
+                rb.gravityScale = 0f;
+
                 anim.SetTrigger("enemydeathing");
                           
             }
            
         }
     }
-<<<<<<< HEAD
     void enemydestroyed()
     {
         Destroy(gameObject);
@@ -60,17 +58,5 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         ai.speed *=10000;
 
-=======
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(speed, rb.velocity.y);
->>>>>>> 6b10d34b45725e5656aa3197a792e7033e02c7d0
     }
 }
